@@ -1,0 +1,4 @@
+.cubetech-portfolio { border-bottom: 1px solid #f3f3f3; padding-bottom: 24px; margin-bottom: 20px; }
+.cubetech-portfolio:last-child { border-bottom: none; }
+.cubetech-portfolio h2 { font-family:"Avenir Next LT W01 Bold"; font-size: 14px; line-height: 18px; text-transform: none; }
+.cubetech-portfolio-content-container img { float: right; margin-left: 15px; margin-bottom: 5px; }
