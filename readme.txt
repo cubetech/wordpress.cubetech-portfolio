@@ -1,18 +1,18 @@
 === cubetech-blocks ===
 Contributors: cubetech, chrigu99
 Donate link: http://www.cubetech.ch
-Tags: blocks, block, jquery, cubetech, group, custom, post, type, custom, customizable, tinymce, category, filter, jquery
+Tags: portfolio, jquery, cubetech, group, custom, post, type, custom, customizable, tinymce, category, filter, jquery
 Requires at least: 3.4
 Tested up to: 3.6
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-cubetech Blocks - a very easy plugin for managing and listing blocks in groups and with shorttags
+cubetech Portfolio - simple portfolio plugin for managing and listing portfolios in groups and with shorttags
 
 == Description ==
 
-cubetech Blocks - a very easy plugin for managing and listing blocks in groups and with shorttags
+cubetech Portfolio - simple portfolio plugin for managing and listing portfolios in groups and with shorttags
 
 Plugin features:
 
@@ -20,8 +20,8 @@ Plugin features:
 * Short code
 * Short code button in TinyMCE
 * Uses builtin jQuery
-* Reuse blocks in different groups
-* Use groups for adding blocks
+* Reuse portfolios in different groups
+* Use groups for adding portfolio to content
 
 == Installation ==                                                                                                                                                
                                                                                                                                                                   
@@ -37,14 +37,8 @@ This section describes how to install the plugin and get it working.
                                                                                                                                                                   
 If you have an idea or a pull request, contribute here:
 
-https://github.com/cubetech/wordpress.cubetech-blocks
+https://github.com/cubetech/wordpress.cubetech-portfolio
                                                                                                                                                                   
-== Screenshots ==
-
-1. Edit panel for a block entry
-2. Add the shortcode
-3. Block list in action
-
 == Changelog ==                                                                                                                                                   
 
 = 1.0 =
