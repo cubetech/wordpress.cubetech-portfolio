@@ -3,7 +3,7 @@
  * Plugin Name: cubetech Portfolio
  * Plugin URI: http://www.cubetech.ch
  * Description: cubetech Portfolio - simple portfolio plugin
- * Version: 1.0
+ * Version: 1.1
  * Author: cubetech GmbH
  * Author URI: http://www.cubetech.ch
  */
@@ -12,8 +12,8 @@ include_once('lib/cubetech-post-type.php');
 include_once('lib/cubetech-shortcode.php');
 include_once('lib/cubetech-group.php');
 
-add_image_size( 'cubetech-portfolio-thumb', 150, 75, true );
-add_image_size( 'cubetech-portfolio-widget', 100, 50, true );
+add_image_size( 'cubetech-portfolio-thumb', 150, 75 );
+add_image_size( 'cubetech-portfolio-widget', 100, 50 );
 
 wp_enqueue_script('jquery');
 wp_register_script('cubetech_portfolio_js', plugins_url('assets/js/cubetech-portfolio.js', __FILE__), 'jquery');
@@ -102,6 +102,23 @@ function cubetech_portfolio_dialog() {
 		</div>
 	</div>
 	<?php
+}
+
+add_filter( 'template_include', 'cubetech_portfolio_template', 1 );
+
+function cubetech_portfolio_template($template_path) {
+    if ( get_post_type() == 'cubetech_portfolio' ) {
+        if ( is_single() ) {
+            // checks if the file exists in the theme first,
+            // otherwise serve the file from the plugin
+            if ( $theme_file = locate_template( array ( 'single-cubetech_portfolio.php' ) ) ) {
+                $template_path = $theme_file;
+            } else {
+                $template_path = plugin_dir_path( __FILE__ ) . '/templates/single.php';
+            }
+        }
+    }
+    return $template_path;
 }
 
 ?>
