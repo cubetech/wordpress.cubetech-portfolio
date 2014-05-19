@@ -16,7 +16,7 @@ add_image_size( 'cubetech-portfolio-thumb', 150, 75 );
 add_image_size( 'cubetech-portfolio-widget', 100, 50 );
 
 wp_enqueue_script('jquery');
-wp_register_script('cubetech_portfolio_js', plugins_url('assets/js/cubetech-portfolio.js', __FILE__), 'jquery');
+wp_register_script('cubetech_portfolio_js', plugins_url('assets/js/cubetech-portfolio.js', __FILE__), array('jquery','wpdialogs'));
 wp_enqueue_script('cubetech_portfolio_js');
 
 add_action('wp_enqueue_scripts', 'cubetech_portfolio_add_styles');
@@ -43,6 +43,16 @@ function cubetech_portfolio_custom_colors() {
            th#year { width: 10%; }
          </style>';
 }
+if(!function_exists('enqueue_css'))
+{
+	function enqueue_css()
+	{
+		wp_register_style('custom_jquery-ui-dialog', plugins_url('assets/css/jquery-ui-dialog.min.css', __FILE__) );
+		wp_enqueue_style('custom_jquery-ui-dialog');
+	}
+	
+} 
+add_action( 'admin_enqueue_scripts', 'enqueue_css' );
 
 add_action('admin_head', 'cubetech_portfolio_custom_colors');
 
