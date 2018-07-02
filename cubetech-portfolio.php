@@ -15,15 +15,12 @@ include_once('lib/cubetech-group.php');
 add_image_size( 'cubetech-portfolio-thumb', 150, 75 );
 add_image_size( 'cubetech-portfolio-widget', 100, 50 );
 
-wp_enqueue_script('jquery');
-wp_register_script('cubetech_portfolio_js', plugins_url('assets/js/cubetech-portfolio.js', __FILE__), array('jquery','wpdialogs'));
-wp_enqueue_script('cubetech_portfolio_js');
-
 add_action('wp_enqueue_scripts', 'cubetech_portfolio_add_styles');
 
 function cubetech_portfolio_add_styles() {
 	wp_register_style('cubetech-portfolio-css', plugins_url('assets/css/cubetech-portfolio.css', __FILE__) );
 	wp_enqueue_style('cubetech-portfolio-css');
+	wp_enqueue_script('cubetech_portfolio_js', plugins_url('assets/js/cubetech-portfolio.js', __FILE__), array('jquery'));
 }
 
 add_filter('nav_menu_css_class', 'cubetech_portfolio_current_type_nav_class', 10, 2 );
@@ -43,76 +40,8 @@ function cubetech_portfolio_custom_colors() {
            th#year { width: 10%; }
          </style>';
 }
-if(!function_exists('enqueue_css'))
-{
-	function enqueue_css()
-	{
-		wp_register_style('custom_jquery-ui-dialog', plugins_url('assets/css/jquery-ui-dialog.min.css', __FILE__) );
-		wp_enqueue_style('custom_jquery-ui-dialog');
-	}
-	
-} 
-add_action( 'admin_enqueue_scripts', 'enqueue_css' );
 
 add_action('admin_head', 'cubetech_portfolio_custom_colors');
-
-/* Add button to TinyMCE */
-function cubetech_portfolio_addbuttons() {
-
-	if ( (! current_user_can('edit_posts') && ! current_user_can('edit_pages')) )
-		return;
-	
-	if ( get_user_option('rich_editing') == 'true') {
-		add_filter("mce_external_plugins", "add_cubetech_portfolio_tinymce_plugin");
-		add_filter('mce_buttons', 'register_cubetech_portfolio_button');
-		add_action( 'admin_footer', 'cubetech_portfolio_dialog' );
-	}
-}
- 
-function register_cubetech_portfolio_button($buttons) {
-   array_push($buttons, "|", "cubetech_portfolio_button");
-   return $buttons;
-}
- 
-function add_cubetech_portfolio_tinymce_plugin($plugin_array) {
-	$plugin_array['cubetech_portfolio'] = plugins_url('assets/js/cubetech-portfolio-tinymce.js', __FILE__);
-	return $plugin_array;
-}
-
-add_action('init', 'cubetech_portfolio_addbuttons');
-
-function cubetech_portfolio_dialog() { 
-
-	$args=array(
-		'hide_empty' => false,
-		'orderby' => 'name',
-		'order' => 'ASC'
-	);
-	$taxonomies = get_terms('cubetech_portfolio_group', $args);
-	
-	?>
-	<style type="text/css">
-		#cubetech_portfolio_dialog { padding: 10px 30px 15px; }
-	</style>
-	<div style="display:none;" id="cubetech_portfolio_dialog">
-		<div>
-			<p>Wählen Sie bitte die einzufügende Referenzengruppe:</p>
-			<p><select name="cubetech_portfolio_taxonomy" id="cubetech_portfolio_taxonomy">
-				<option value="">Bitte Gruppe auswählen</option>
-				<option value="all">Alle Kategorien anzeigen</option>
-				<?php
-				foreach($taxonomies as $tax) :
-					echo '<option value="' . $tax->term_id . '">' . $tax->name . '</option>';
-				endforeach;
-				?>
-			</select></p>
-		</div>
-		<div>
-			<p><input type="submit" class="button-primary" value="Blockgruppe einfügen" onClick="if ( cubetech_portfolio_taxonomy.value != '' && cubetech_portfolio_taxonomy.value != 'undefined' ) { tinyMCE.activeEditor.execCommand('mceInsertContent', 0, '[cubetech-portfolio group=' + cubetech_portfolio_taxonomy.value + ']'); tinyMCEPopup.close(); }" /></p>
-		</div>
-	</div>
-	<?php
-}
 
 add_filter( 'template_include', 'cubetech_portfolio_template', 1 );
 

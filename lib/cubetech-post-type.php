@@ -26,7 +26,6 @@ function cubetech_portfolio_create_post_type() {
 			'supports' => array('title', 'editor', 'thumbnail')
 		)
 	);
-	flush_rewrite_rules();
 }
 add_action('init', 'cubetech_portfolio_create_post_type');
 ?>

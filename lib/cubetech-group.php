@@ -25,7 +25,6 @@ function cubetech_portfolio_create_taxonomy() {
 	);
 
 	register_taxonomy( 'cubetech_portfolio_group', array( 'cubetech_portfolio' ), $args );
-	flush_rewrite_rules();
 }
 
 add_action('init', 'cubetech_portfolio_create_taxonomy');
